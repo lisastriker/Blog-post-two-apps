@@ -6,8 +6,7 @@
     <h3>Welcome to your dashboard {{this.name}}</h3>
     <ul>    
     <li class="indivList" v-for="item in this.items" :key="item.id">
-      <router-link :to="{name:'IndividualPost', params: {id:item.id}, props:{ items: {post: item.data().post, createdOn: item.data().createdOn}}
-        }">
+      <router-link :to="{name:'IndividualPost', params: {id:item.id}}">
       {{ item.data().post }}
       {{ item.data().createdOn}}
       </router-link>
@@ -92,19 +91,13 @@ export default {
   },
   created(){
        db.collection("postsCollection").onSnapshot((querySnapshot) => {
-      querySnapshot.forEach((doc) => {
+        this.items = []
+        querySnapshot.forEach((doc) => {
         this.items.push(doc)
         console.log(`${doc.id} => ${doc.data().post}`);
         console.log(items)
     });
   });
-  //   db.collection("postsCollection").get().then((querySnapshot) => {
-  //   querySnapshot.forEach((doc) => {
-  //       this.items.push(doc)
-  //       console.log(`${doc.id} => ${doc.data().post}`);
-  //       console.log(items)
-  //   });
-  // });
   },
   methods:{
     open(){
@@ -121,6 +114,7 @@ export default {
         createdOn : dateString,
       }).then(()=>{
         this.count += 1,
+        this.message = ''
         this.$vm2.close('modal-1')
         })
     },
@@ -129,6 +123,15 @@ export default {
     },
     deleteDocument(id){
       db.collection("postsCollection").doc(id).delete()
+    },
+    updateCollection(){
+          db.collection("postsCollection").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+        this.items.push(doc)
+        console.log(`${doc.id} => ${doc.data().post}`);
+        console.log(items)
+    });
+  });
     }
   }
 }
