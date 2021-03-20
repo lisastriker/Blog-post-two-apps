@@ -1,23 +1,42 @@
 <template>
   <div class="home">   
-  <form class="home" @submit.prevent="login">     
+  <form class="form" @submit.prevent="login">     
     <h2>Login</h2>     
-    <input       
+    <input id="emailInput"      
       type="email"       
       placeholder="Email address..."       
       v-model="email"     
     />     
-    <input       
+    <input id="passwordInput"      
       type="password"       
       placeholder="password..."       
       v-model="password"     
     />     
-    <button type="submit">
+    <button id="loginButton" type="submit">
        Login
     </button>   
   </form> 
   </div>
 </template>
+
+<style>
+#loginButton {
+  background:orange;
+  width:40%;
+  padding:10px;
+  border: 2px solid black;
+}
+#emailInput {
+  width:40%;
+  padding:10px;
+  border: 2px solid black;
+}
+#passwordInput {
+  width:40%;
+  padding:10px;
+  border: 2px solid black;
+}
+</style>
 
 <script>
 // @ is an alias to /src

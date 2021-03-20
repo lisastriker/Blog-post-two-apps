@@ -32,15 +32,34 @@
   }
 }
 
-.home {
+.home{
+  display:flex;
+  justify-content: center;
+  width:100wh;
+}
+
+.form {
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   height:100vh;
+  width:40%;
+  border:2px solid black;
+  border-radius:5px;
 }
 
-input {
-  margin-bottom:20px;
+.vm2__btn{
+  background:orange;
+  border:solid black 2px;
+  border-radius:5px;
+}
+#vm2_box_modal-1{
+  width:500px;
+  height:500px;
+}
+
+.vm2_body{
+  height:70%;
 }
 </style>

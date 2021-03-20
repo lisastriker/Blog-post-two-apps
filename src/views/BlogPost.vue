@@ -1,9 +1,9 @@
 <template>
-  <div className="container">
+  <div class="container">
   <button id="add" v-on:click="open">Add post</button>
   <button id="logout" v-on:click="logOut">Log Out</button>
   <div class="BlogPost">
-    <h1>Welcome to your dashboard</h1>
+    <h3>Welcome to your dashboard {{this.name}}</h3>
     <ul>    
     <li v-for="item in this.items" :key="item.id">
       <router-link :to="{name:'IndividualPost', params: {id:item.id}, props:{ items: {post: item.data().post, createdOn: item.data().createdOn}}
@@ -17,44 +17,44 @@
     :footerOptions="{
         btn1OnClick: () => createPost(),
         btn2OnClick: () => close(),
+        btn1: this.submit,
+        btn2: this.cancel,
     }"  
-      name="modal-1" @on-close="close">Enter blog post
-    <textarea v-model="message" placeholder="Edit me"></textarea>
+      name="modal-1" @on-close="close">
+    <textarea v-model="message" placeholder="Add content here"></textarea>
     </vue-modal-2>
   </div>
   </div>
 </template>
 
 <style>
-.container{
-  width:100wh;
-  height:100vh;
-  display:flex;
-}
-.modalContainer {
-  border: solid black 2px;
-  background-color: red;
-}
-
 li{
   border:solid 2px black;
   padding:10px;
 }
 
 #logout{
+  background:orange;
   display:inline-block;
   margin-left:80%;
   border: black 2px solid;
-  padding:5px;
+  padding:10px;
   border-radius: 5px;
 }
 
 #add{
+  background:orange;
   display:inline-block;
-  margin-right:0%;
+  margin-left:0%;
   border: black 2px solid;
-  padding:5px;
+  padding:10px;
   border-radius: 5px;
+}
+
+textarea{
+  height:100%;
+  width:100%;
+  padding-left:10px;
 }
 </style>
 
@@ -66,11 +66,14 @@ export default {
   name: 'BlogPost',
   data(){
     return {
+      submit:"submit",
+      cancel: "cancel",
       message:'',
       items:[],
       itemIds:[],
       count:1,
       showModal:false,
+      name: auth.currentUser.email
     };
   },
   created(){

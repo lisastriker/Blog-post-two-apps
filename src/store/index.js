@@ -10,11 +10,8 @@ db.collection("postsCollection").orderBy('createdOn', 'desc').onSnapshot(snapsho
 
   snapshot.forEach(doc => {
     let post1 = doc.data().post
-    // post.id = doc.id
-
     postsArray.push(post1)
   })
-
   store.commit('setPosts', postsArray)
 })
 
