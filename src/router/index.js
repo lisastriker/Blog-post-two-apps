@@ -33,7 +33,9 @@ const routes = [
     path:'/blog/me/:id',
     name:'IndividualPost',
     component: IndividualPost,
-    requiresAuth:true
+    meta: {
+      requiresAuth:true
+    }
   }
 ]
 

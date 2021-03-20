@@ -5,12 +5,13 @@
   <div class="BlogPost">
     <h3>Welcome to your dashboard {{this.name}}</h3>
     <ul>    
-    <li v-for="item in this.items" :key="item.id">
+    <li class="indivList" v-for="item in this.items" :key="item.id">
       <router-link :to="{name:'IndividualPost', params: {id:item.id}, props:{ items: {post: item.data().post, createdOn: item.data().createdOn}}
         }">
       {{ item.data().post }}
       {{ item.data().createdOn}}
       </router-link>
+      <img id="deleteicon" src="../assets/delete.png" v-on:click="deleteDocument(item.id)" />
     </li>
      </ul>
     <vue-modal-2 :headerOptions="{title: 'Blog Post'}"
@@ -31,6 +32,19 @@
 li{
   border:solid 2px black;
   padding:10px;
+}
+
+#deleteicon{
+  width:20px;
+  height:20px;
+}
+
+#deleteicon:hover{
+  cursor:pointer;
+}
+
+.indivList:hover{
+  background: #fed8b1;
 }
 
 #logout{
@@ -77,13 +91,20 @@ export default {
     };
   },
   created(){
-    db.collection("postsCollection").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
+       db.collection("postsCollection").onSnapshot((querySnapshot) => {
+      querySnapshot.forEach((doc) => {
         this.items.push(doc)
         console.log(`${doc.id} => ${doc.data().post}`);
         console.log(items)
     });
   });
+  //   db.collection("postsCollection").get().then((querySnapshot) => {
+  //   querySnapshot.forEach((doc) => {
+  //       this.items.push(doc)
+  //       console.log(`${doc.id} => ${doc.data().post}`);
+  //       console.log(items)
+  //   });
+  // });
   },
   methods:{
     open(){
@@ -105,6 +126,9 @@ export default {
     },
     logOut(){
       auth.signOut().then(()=>this.$router.push('/'))
+    },
+    deleteDocument(id){
+      db.collection("postsCollection").doc(id).delete()
     }
   }
 }

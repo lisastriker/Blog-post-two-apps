@@ -59,6 +59,12 @@
   height:500px;
 }
 
+a{
+  color:black;
+  text-decoration: none;
+}
+
+
 .vm2_body{
   height:70%;
 }
