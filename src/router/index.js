@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import BlogPost from '../views/BlogPost.vue'
 import About from '../views/About.vue'
+import IndividualPost from '../views/IndividualPost'
 Vue.use(VueRouter)
 
 
@@ -28,7 +29,12 @@ const routes = [
     meta:{
       requiresAuth: true
     }
-  },
+  },{
+    path:'/blog/me/:id',
+    name:'IndividualPost',
+    component: IndividualPost,
+    requiresAuth:true
+  }
 ]
 
 const router = new VueRouter({
