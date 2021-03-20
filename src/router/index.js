@@ -1,48 +1,44 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import BlogPost from '../views/BlogPost.vue'
-import About from '../views/About.vue'
-import IndividualPost from '../views/IndividualPost'
-Vue.use(VueRouter)
-
+import Vue from "vue";
+import VueRouter from "vue-router";
+import Home from "../views/Home.vue";
+import BlogPost from "../views/BlogPost.vue";
+import About from "../views/About.vue";
+import IndividualPost from "../views/IndividualPost";
+Vue.use(VueRouter);
 
 const routes = [
   {
-    path: '/',
-    name: 'Home',
+    path: "/",
+    name: "Home",
     component: Home
   },
   {
-    path: '/about',
-    name: 'About',
+    path: "/about",
+    name: "About",
     component: About
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    // component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
   },
   {
-    path: '/blog/me',
-    name: 'BlogPost',
+    path: "/blog/me",
+    name: "BlogPost",
     component: BlogPost,
-    meta:{
+    meta: {
       requiresAuth: true
     }
-  },{
-    path:'/blog/me/:id',
-    name:'IndividualPost',
+  },
+  {
+    path: "/blog/me/:id",
+    name: "IndividualPost",
     component: IndividualPost,
     meta: {
-      requiresAuth:true
+      requiresAuth: true
     }
   }
-]
+];
 
 const router = new VueRouter({
-  mode: 'history',
+  mode: "history",
   base: process.env.BASE_URL,
   routes
-})
+});
 
-export default router
+export default router;

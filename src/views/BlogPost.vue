@@ -4,7 +4,7 @@
   <button id="logout" v-on:click="logOut">Log Out</button>
   <div class="BlogPost">
     <h3>Welcome to your dashboard {{this.name}}</h3>
-    <ul>    
+    <ul>
     <li class="indivList" v-for="item in this.items" :key="item.id">
       <router-link :to="{name:'IndividualPost', params: {id:item.id}}">
       {{ item.data().post }}
@@ -19,7 +19,7 @@
         btn2OnClick: () => close(),
         btn1: this.submit,
         btn2: this.cancel,
-    }"  
+    }"
       name="modal-1" @on-close="close">
     <textarea v-model="message" placeholder="Add content here"></textarea>
     </vue-modal-2>
@@ -72,68 +72,67 @@ textarea{
 </style>
 
 <script>
-let items = []
-import {db} from '../main.js'
-import {auth} from '../main.js'
+import { db, auth } from '../main.js'
+
+const items = []
 export default {
   name: 'BlogPost',
-  data(){
+  data () {
     return {
-      submit:"submit",
-      cancel: "cancel",
-      message:'',
-      items:[],
-      itemIds:[],
-      count:1,
-      showModal:false,
+      submit: 'submit',
+      cancel: 'cancel',
+      message: '',
+      items: [],
+      itemIds: [],
+      count: 1,
+      showModal: false,
       name: auth.currentUser.email
-    };
+    }
   },
-  created(){
-       db.collection("postsCollection").onSnapshot((querySnapshot) => {
-        this.items = []
-        querySnapshot.forEach((doc) => {
+  created () {
+    db.collection('postsCollection').onSnapshot((querySnapshot) => {
+      this.items = []
+      querySnapshot.forEach((doc) => {
         this.items.push(doc)
-        console.log(`${doc.id} => ${doc.data().post}`);
+        console.log(`${doc.id} => ${doc.data().post}`)
         console.log(items)
-    });
-  });
+      })
+    })
   },
-  methods:{
-    open(){
+  methods: {
+    open () {
       this.$vm2.open('modal-1')
     },
-    close(){
+    close () {
       this.$vm2.close('modal-1')
     },
-    createPost(){
-      const date = new Date
-      const dateString = date.toUTCString();
-      db.collection("postsCollection").add({
-        post:this.message,
-        createdOn : dateString,
-      }).then(()=>{
+    createPost () {
+      const date = new Date()
+      const dateString = date.toUTCString()
+      db.collection('postsCollection').add({
+        post: this.message,
+        createdOn: dateString
+      }).then(() => {
         this.count += 1,
         this.message = ''
         this.$vm2.close('modal-1')
-        })
+      })
     },
-    logOut(){
-      auth.signOut().then(()=>this.$router.push('/'))
+    logOut () {
+      auth.signOut().then(() => this.$router.push('/'))
     },
-    deleteDocument(id){
-      db.collection("postsCollection").doc(id).delete()
+    deleteDocument (id) {
+      db.collection('postsCollection').doc(id).delete()
     },
-    updateCollection(){
-          db.collection("postsCollection").get().then((querySnapshot) => {
+    updateCollection () {
+      db.collection('postsCollection').get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
-        this.items.push(doc)
-        console.log(`${doc.id} => ${doc.data().post}`);
-        console.log(items)
-    });
-  });
+          this.items.push(doc)
+          console.log(`${doc.id} => ${doc.data().post}`)
+          console.log(items)
+        })
+      })
     }
   }
 }
 </script>
-

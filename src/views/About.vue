@@ -7,10 +7,10 @@
 <script>
 export default {
   name: 'About',
-  methods:{
-  redirect(){
-  this.$router.push('/about');
-  }
+  methods: {
+    redirect () {
+      this.$router.push('/about')
+    }
   }
 }
 </script>

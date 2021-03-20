@@ -1,9 +1,8 @@
 <template>
   <div id="app">
     <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link> |
-      <router-link to="/blog/me">Blog</router-link>
+      <router-link id="nav" to="/about">About</router-link> |
+      <router-link id="nav" to="/blog/me">Blog</router-link>
     </div>
     <router-view/>
   </div>
@@ -32,6 +31,9 @@
   }
 }
 
+#nav:hover{
+  color:orange;
+}
 .home{
   display:flex;
   justify-content: center;
@@ -63,7 +65,6 @@ a{
   color:black;
   text-decoration: none;
 }
-
 
 .vm2_body{
   height:70%;

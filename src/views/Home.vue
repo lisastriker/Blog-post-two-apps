@@ -1,21 +1,21 @@
 <template>
-  <div class="home">   
-  <form class="form" @submit.prevent="login">     
-    <h2>Login</h2>     
-    <input id="emailInput"      
-      type="email"       
-      placeholder="Email address..."       
-      v-model="email"     
-    />     
-    <input id="passwordInput"      
-      type="password"       
-      placeholder="password..."       
-      v-model="password"     
-    />     
+  <div class="home">
+  <form class="form" @submit.prevent="login">
+    <h2>Login</h2>
+    <input id="emailInput"
+      type="email"
+      placeholder="Email address..."
+      v-model="email"
+    />
+    <input id="passwordInput"
+      type="password"
+      placeholder="password..."
+      v-model="password"
+    />
     <button id="loginButton" type="submit">
        Login
-    </button>   
-  </form> 
+    </button>
+  </form>
   </div>
 </template>
 
@@ -42,27 +42,27 @@
 // @ is an alias to /src
 import firebase from 'firebase'
 
-//Post
+// Post
 export default {
   name: 'Home',
-  data(){
+  data () {
     return {
       email: '',
-      password: '',
-    };
+      password: ''
+    }
   },
-  methods:{
-    login() {
-    firebase
-      .auth()
-      .signInWithEmailAndPassword(this.email, this.password)
-      .then(() => {
-        this.$router.push('blog/me')
-      })
-      .catch(error => {
-        alert(error.message);
-      });
-    },
+  methods: {
+    login () {
+      firebase
+        .auth()
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          this.$router.push('blog/me')
+        })
+        .catch(error => {
+          alert(error.message)
+        })
+    }
   }
 }
 </script>
