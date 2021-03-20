@@ -5,14 +5,14 @@ import router from './router'
 import firebase from 'firebase'
 import 'firebase/auth'
 import 'firebase/firestore'
-
+import Modal from "@burhanahmeed/vue-modal-2"
 var firebaseConfig = {
-  apiKey: "AIzaSyAQTLOSJ9z72SnWqx-4zOoC2faT4to1Qxw",
-  authDomain: "vue-blog-authentication.firebaseapp.com",
-  projectId: "vue-blog-authentication",
-  storageBucket: "vue-blog-authentication.appspot.com",
-  messagingSenderId: "844968348016",
-  appId: "1:844968348016:web:1ff0665fd2cf988e53a7b5"
+  apiKey: "AIzaSyC5ZvqEagUcTnmZp0NaTUIXSWjF0Mdj91o",
+  authDomain: "vue-blog-post-v.firebaseapp.com",
+  projectId: "vue-blog-post-v",
+  storageBucket: "vue-blog-post-v.appspot.com",
+  messagingSenderId: "740728734170",
+  appId: "1:740728734170:web:875a58750a026fcdc340e3"
 };
 firebase.initializeApp(firebaseConfig)
 
@@ -27,10 +27,11 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
-// const db = firebase.firestore()
-// const auth = firebase.auth()
-// const post = db.collection('post')
+export const db = firebase.firestore()
+export const auth = firebase.auth()
+
 Vue.config.productionTip = false
+Vue.use(Modal)
 firebase.auth().onAuthStateChanged(function (user) {
   user
   new Vue({
